@@ -127,3 +127,15 @@ const deleteStudent = (student) => {
       .then(() => dispatch(delete_Student(student)))
   }
 }
+
+
+export { 
+  getSchools,
+  createSchool,
+  updateSchool,
+  deleteSchool,
+  getStudents,
+  createStudent,
+  updateStudent,
+  deleteStudent
+}
