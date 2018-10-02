@@ -4,25 +4,35 @@ const conn = new Sequelize(process.env.DATABASE_URL, {logging: false})
 
 const School = conn.define('school', {
     name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     },
     address: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     },
     description: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        allowNull: false
     }
 })
 
 const Student = conn.define('student', {
     firstName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     },
     lastName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     },
     gpa: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL,
+        allowNull: false,
+        validate: {
+          min: 0.0,
+          max: 4.0
+        }
     }
 })
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import Students from './Students'
+import {Link} from 'react-router-dom'
 
 export default class AllStudents extends Component {
   constructor () {
@@ -20,7 +20,18 @@ export default class AllStudents extends Component {
   render () {
     const students = this.state.students
     return (
-      <Students students={students} /> // the prop for this stories is the state.stories
+      <div id='stories' className='column'>
+        <br />
+        {
+          students.map(student => (
+            <div className='story' key={student.id}>
+              <Link to={`/students/${student.id}`}> 
+                <div>{student.firstName} {student.lastName} (attending: {student.school.name})</div>
+              </Link>
+            </div>
+          ))
+        }
+      </div>
     )
   }
 }
