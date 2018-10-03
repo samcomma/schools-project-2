@@ -41,7 +41,7 @@ const mapStateToProps = ({ students, schools }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    deleteSchool: student => dispatch(deleteStudent(student))
+    deleteStudent: student => dispatch(deleteStudent(student))
 })
 
  
