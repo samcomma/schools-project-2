@@ -18,7 +18,7 @@ class AllStudents extends Component {
                     <Link to={`/students/${student.id}`}> 
                         <div>{student.firstName} {student.lastName} (attending: {student.school.name})</div>
                     </Link>
-                    <button className="button" onClick={() => deleteStudent(student.id)}>
+                    <button className="button" onClick={() => deleteStudent(student)}>
                         Remove
                     </button>
                 </li>
@@ -41,7 +41,7 @@ const mapStateToProps = ({ students, schools }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    deleteSchool: id => dispatch(deleteStudent(id))
+    deleteSchool: student => dispatch(deleteStudent(student))
 })
 
  

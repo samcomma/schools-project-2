@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { deleteSchool, getSchools } from './store'
@@ -21,7 +22,7 @@ class School extends Component {
         <br />
         <h3>Students:</h3>
             <div>
-                {/*<ul>
+                <ul>
                     {
                     school.students.map(student => (
                         <li key={student.id}>
@@ -31,10 +32,10 @@ class School extends Component {
                         </li>
                     ))
                     }
-                  </ul>*/}
+                  </ul>
             </div>
         <br />
-        <button className="button" onClick={() => deleteSchool(school.id)}>
+        <button className="button" onClick={() => deleteSchool(school)}>
             Remove
         </button>
       </div>
@@ -43,18 +44,17 @@ class School extends Component {
 }
 
 
-// CAN BE CLEANED UP:
-const mapStateToProps = (state, ownProps) => {
+  const mapStateToProps = ({ schools, students }, { match }) => {
+    const school = schools.find(school => school.id === match.params.id * 1);
     return {
-      schools: state.schools,
-      school: getSchools(ownProps.id, state.schools)
+      school,
+      students
     }
   }
 
 
-
 const mapDispatchToProps = dispatch => ({
-    deleteSchool: id => dispatch(deleteSchool(id))
+    deleteSchool: school => dispatch(deleteSchool(school))
 })
 
  
