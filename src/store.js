@@ -129,6 +129,52 @@ const deleteStudent = (student) => {
 }
 
 
+
+// REDUCERS:
+const schoolsReducer = (state = [], action) => {
+    switch (action.type) {
+      case GET_SCHOOLS:
+        return action.schools
+      case CREATE_SCHOOL:
+        return [...state, action.school]
+      case UPDATE_SCHOOL:
+        return state.map(school => (school.id !== action.school.id ? school : action.school))
+      case DELETE_SCHOOL:
+        return state.filter(school => school.id !== action.school.id)
+      default:
+        return state
+    }
+  }
+
+  
+const studentsReducer = (state = [], action) => {
+    switch (action.type) {
+      case GET_STUDENTS:
+        return action.students
+      case CREATE_STUDENT:
+        return [...state, action.student]
+      case UPDATE_STUDENT:
+        return state.map(student => (student.id !== action.student.id ? student : action.student))
+      case DELETE_STUDENT:
+        return state.filter(student => student.id !== action.student.id)
+      default:
+        return state
+    }
+  }
+
+
+const reducer = combineReducers({
+    schools: schoolsReducer,
+    students: studentsReducer
+})
+  
+
+// STORE:
+const store = createStore(reducer, applyMiddleware(logger, thunk))
+
+
+export default store
+// DO I NEED TO EXPORT?:
 export { 
   getSchools,
   createSchool,

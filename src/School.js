@@ -1,37 +1,16 @@
-import React, {Component} from 'react'
-import axios from 'axios'
-//import Students from './Students'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-export default class School extends Component {
-  constructor () {
-    super()
-    this.state = {
-      school: {}
-    }
-  }
+import { deleteSchool, getSchools } from './store'
 
-  async componentDidMount () {
-    const schoolId = this.props.match.params.schoolId // or { storyId } = this.props.match.params
-    const res = await axios.get(`/api/schools/${schoolId}`) // this makes a request to our server/api/stories.js (the second get request in that file)
-    const school = res.data
-    this.setState({
-      school
-    })
-    /*
-    TRY TURN ABOVE IN TO PROMIS CHAIN AS BELOW, NICER THAN USING ASYNC AWAIT
-    axios.get('/api/stories')
-      .then(res => res.data)
-      .then(stories => this.setState({story}))
-      .catch(console.log.bind(console))
-      */  
-  }
+
+class School extends Component {
+
 
   render () {
-    const school = this.state.school
-    const students = this.state.school.students
-    console.log(students)
+    const { school, deleteSchool } = this.props
     return (
-      <div id='single-story' className='column'>
+      <div id='single-school' className='column'>
         <h2>{ school.name }</h2>
         <hr />
         <h3>Address:</h3>
@@ -41,39 +20,42 @@ export default class School extends Component {
         <div>{ school.description }</div>
         <br />
         <h3>Students:</h3>
-        {/*<Students students={students}/>*/}
+            <div>
+                {/*<ul>
+                    {
+                    school.students.map(student => (
+                        <li key={student.id}>
+                        <Link to={`/students/${student.id}`}>
+                            {student.firstName} {student.lastName}
+                        </Link>
+                        </li>
+                    ))
+                    }
+                  </ul>*/}
+            </div>
+        <br />
+        <button className="button" onClick={() => deleteSchool(school.id)}>
+            Remove
+        </button>
       </div>
     )
   }
 }
 
 
+// CAN BE CLEANED UP:
+const mapStateToProps = (state, ownProps) => {
+    return {
+      schools: state.schools,
+      school: getSchools(ownProps.id, state.schools)
+    }
+  }
 
 
 
-/*
-const School = ({ school, selectSchool })=> {
-  return (
-    <div>
-      <h2>{ school.name }</h2>
-      <hr />
-      <h3>Address:</h3>
-      <div>{ school.address }</div>
-      <br />
-      <h3>Information:</h3>
-      <div>{ school.description }</div>
-      <br />
-      <h3>Students:</h3>
-      <ul>
-        {
-          school.students.map(student => <li key={ student.id }>{ student.firstName } { student.lastName }</li>)
-        }
-      </ul>
-      <a href='#' onClick={()=> selectSchool(-1)}>Back</a>
-    </div>
-  )
-}
+const mapDispatchToProps = dispatch => ({
+    deleteSchool: id => dispatch(deleteSchool(id))
+})
 
-
-export default School
-*/
+ 
+export default connect(mapStateToProps, mapDispatchToProps)(School)

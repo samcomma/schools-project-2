@@ -1,40 +1,49 @@
 import React, {Component} from 'react'
-import axios from 'axios'
 import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
 
-export default class AllSchools extends Component {
-  constructor () {
-    super()
-    this.state = {
-      schools: []
-    }
-  }
+import { deleteSchool } from './store'
 
-  componentDidMount () {
-    axios.get('/api/schools')
-      .then(res => res.data)
-      .then(schools => this.setState({schools}))
-      .catch(console.log.bind(console))
-  }
+class AllSchools extends Component {
 
   render () {
-    const schools = this.state.schools
+    const { schools, deleteSchool } = this.props
+    console.log(this.props)
     return (
-      <div id='stories' className='column'>
-        {
-          schools.map(school => (
-            <div className='story' key={school.id}>
-              <Link to={`/schools/${school.id}`}> 
-                <h4>{school.name}     (Students: {school.students.length}) </h4>
-              </Link>
-              <hr />
-            </div>
-          ))
-        }
+      <div id='schools' className='column'>
+        <ul>
+            {
+            schools.map(school => (
+                <li className='school' key={school.id}>
+                    <Link to={`/schools/${school.id}`}> 
+                        <h4>{school.name} (Students: {school.students.length}) </h4>
+                    </Link>
+                    <button className="button" onClick={() => deleteSchool(school.id)}>
+                        Remove
+                    </button>
+                    <hr />
+                </li>
+            ))
+            }
+        </ul>
+        <Link to='/schools/create'>
+          <button>Add School</button>
+        </Link>
       </div>
     )
   }
 }
 
 
+const mapStateToProps = ({ schools, students }) => ({
+  schools,
+  students
+})
 
+
+const mapDispatchToProps = dispatch => ({
+    deleteSchool: id => dispatch(deleteSchool(id))
+})
+
+ 
+export default connect(mapStateToProps, mapDispatchToProps)(AllSchools)

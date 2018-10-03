@@ -1,37 +1,48 @@
 import React, {Component} from 'react'
-import axios from 'axios'
 import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
 
-export default class AllStudents extends Component {
-  constructor () {
-    super()
-    this.state = {
-      students: []
-    }
-  }
+import { deleteStudent } from './store'
 
-  componentDidMount () {
-    axios.get('/api/students')
-      .then(res => res.data)
-      .then(students => this.setState({students}))
-      .catch(console.log.bind(console))
-  }
-
+class AllStudents extends Component {
+  
   render () {
-    const students = this.state.students
+    const { students, deleteStudent } = this.props
     return (
       <div id='stories' className='column'>
         <br />
-        {
-          students.map(student => (
-            <div className='story' key={student.id}>
-              <Link to={`/students/${student.id}`}> 
-                <div>{student.firstName} {student.lastName} (attending: {student.school.name})</div>
-              </Link>
-            </div>
-          ))
-        }
+        <ul>
+            {
+            students.map(student => (
+                <li className='story' key={student.id}>
+                    <Link to={`/students/${student.id}`}> 
+                        <div>{student.firstName} {student.lastName} (attending: {student.school.name})</div>
+                    </Link>
+                    <button className="button" onClick={() => deleteStudent(student.id)}>
+                        Remove
+                    </button>
+                </li>
+            ))
+            }
+        </ul>
+        <Link to='/students/create'>
+          <button>Add Student</button>
+        </Link>
       </div>
     )
   }
 }
+
+
+
+const mapStateToProps = ({ students, schools }) => ({
+  students,
+  schools
+})
+
+const mapDispatchToProps = dispatch => ({
+    deleteSchool: id => dispatch(deleteStudent(id))
+})
+
+ 
+export default connect(mapStateToProps, mapDispatchToProps)(AllStudents)
