@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import store, { createSchool } from './store'
 
-export default class SchoolForm extends Component {
-  /*
+class SchoolForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
       name: '',
       address: '',
-      description: '',
+      description: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -26,7 +25,7 @@ export default class SchoolForm extends Component {
     evt.preventDefault()
     store.dispatch(createSchool(this.state))
   }
-*/
+
   render(){
     return(
       <div>Hey</div>
@@ -34,10 +33,5 @@ export default class SchoolForm extends Component {
   }
 }
 
-/*
-const mapDispatchToProps = dispatch => ({
-    createSchool: school => dispatch(createSchool(school))
-})
 
-export default connect(null, mapDispatchToProps)(SchoolForm)
-*/
+export default connect()(SchoolForm)
