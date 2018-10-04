@@ -23,14 +23,14 @@ class Student extends Component {
         <div>GPA: { student.gpa }</div>
         <br />
         <Link to={`/students/${student.id}/update`}>
-          <button>Edit Student</button>
+          <button className='button'>Edit Student</button>
         </Link>
         <br />
         <Link to={'/students-create'}>
-          <button>Add Student</button>
+          <button className='button'>Add Student</button>
         </Link>
         <br />
-        <button className="button" onClick={() => deleteStudent(student)}>
+        <button className='button-delete' onClick={() => deleteStudent(student)}>
             Remove this Student
         </button>
       </div>

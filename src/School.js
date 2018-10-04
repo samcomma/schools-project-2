@@ -38,14 +38,14 @@ class School extends Component {
             </div>
         <br />
         <Link to={`/schools/${school.id}/update`}>
-          <button>Edit School</button>
+          <button className='button'>Edit School</button>
         </Link>
         <br />
         <Link to={'/schools-create'}>
-          <button>Add School</button>
+          <button className='button'>Add School</button>
         </Link>
         <br />
-        <button className="button" onClick={() => deleteSchool(school)}>
+        <button className='button-delete' onClick={() => deleteSchool(school)}>
             Remove this School
         </button>
       </div>

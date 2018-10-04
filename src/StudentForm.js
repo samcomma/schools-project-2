@@ -52,7 +52,7 @@ class StudentForm extends Component {
               }  
           </select>
           </label>
-          <button value='submit' onClick={() => createStudent(this.state)}>Create</button>
+          <button className='button' value='submit' onClick={() => createStudent(this.state)}>Create</button>
         </form>
       </div>
     )

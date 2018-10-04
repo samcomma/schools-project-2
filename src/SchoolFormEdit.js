@@ -44,7 +44,7 @@ class SchoolFormEdit extends Component {
             <label>Description:
                 <input type='text' name='description' value={this.state.value} onChange={this.handleChange} />
             </label>
-            <button value='Update' onClick={() => updateSchool(this.state)}>Update</button>
+            <button className='button' value='Update' onClick={() => updateSchool(this.state)}>Update</button>
         </form>
       </div>
     )

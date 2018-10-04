@@ -22,7 +22,7 @@ class AllSchools extends Component {
                     <Link to={`/schools/${school.id}`} style={{ textDecoration: 'none' }}> 
                         <h4>{school.name} (Students: {studentsAttending.length}) </h4>
                     </Link>
-                    <button className="button" onClick={() => deleteSchool(school)}>
+                    <button className='button-delete' onClick={() => deleteSchool(school)}>
                         Remove
                     </button>
                     <br />
@@ -32,7 +32,7 @@ class AllSchools extends Component {
             }
         </ul>
         <Link to='/schools-create'>
-          <button className="button">Add School</button>
+          <button className='button'>Add School</button>
         </Link>
       </div>
     )
