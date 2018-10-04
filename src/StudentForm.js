@@ -28,7 +28,6 @@ class StudentForm extends Component {
 
   render() {
     const { schools } = this.props
-    console.log('WE SEE THE STUDENT FORM');
     return (
       <div>
         <h3>Create Student:</h3>
@@ -42,14 +41,14 @@ class StudentForm extends Component {
             <input type='text' name='lastName' value={this.state.lastName} onChange={this.handleChange} />
           </label>
           <label>GPA:
-            <input type='number' min='0' max='4' name='gpa' value={this.state.gpa} onChange={this.handleChange} />
+            <input type='number' step='0.1' min='0' max='4' name='gpa' value={this.state.gpa} onChange={this.handleChange} />
           </label>
           <label>Attending:
           <select name='school'>
               {/*MUST ONLY ALLOW CURRENT SCHOOLS TO BE CHOSEN USING schools PROP*/}
           </select>
           </label>
-          <input type='submit' value='submit' />
+          <button value='submit' onClick={() => createStudent(this.state)}>Create</button>
         </form>
       </div>
     )
@@ -62,4 +61,8 @@ const mapStateToProps = ({ students, schools }) => ({
     schools
   })
 
-export default connect(mapStateToProps)(StudentForm);
+const mapDispatchToProps = dispatch => ({
+    createStudent: student => dispatch(createStudent(student))
+  })
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentForm);

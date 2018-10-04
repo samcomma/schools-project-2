@@ -4,7 +4,6 @@ import store, { createSchool } from './store'
 
 class SchoolForm extends Component {
   constructor(props) {
-    console.log('Constructing School Form')
     super(props)
     this.state = {
       name: '',
@@ -23,7 +22,6 @@ class SchoolForm extends Component {
   
 
   handleSubmit(evt) {
-    console.log('handle submit hey')
     //evt.preventDefault()
     store.dispatch(createSchool(this.state))
   }
@@ -46,7 +44,7 @@ class SchoolForm extends Component {
             <label>Description:
                 <input type='text' name='description' value={this.state.value} onChange={this.handleChange} />
             </label>
-            <button value='Create' onClick={() => createSchool(this.state)}>x</button>
+            <button value='Create' onClick={() => createSchool(this.state)}>Create</button>
         </form>
       </div>
     )
@@ -57,4 +55,4 @@ const mapDispatchToProps = dispatch => ({
   createSchool: school => dispatch(createSchool(school))
 })
 
-export default connect(()=>{}, mapDispatchToProps)(SchoolForm)
+export default connect(null, mapDispatchToProps)(SchoolForm)

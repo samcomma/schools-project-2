@@ -6,7 +6,6 @@ class SchoolFormEdit extends Component {
   constructor(props) {
     super(props)
     const { school } = this.props
-    console.log('**********', school)
     this.state = {
       name: school ? school.name : '',
       address: school ? school.address : '',
@@ -25,7 +24,7 @@ class SchoolFormEdit extends Component {
   
 
   handleSubmit(evt) {
-    evt.preventDefault()
+    //evt.preventDefault()
     store.dispatch(updateSchool(this.state))
   }
 
@@ -45,7 +44,7 @@ class SchoolFormEdit extends Component {
             <label>Description:
                 <input type='text' name='description' value={this.state.value} onChange={this.handleChange} />
             </label>
-            <input type='submit' value='Update' />
+            <button value='Update' onClick={() => updateSchool(this.state)}>Update</button>
         </form>
       </div>
     )
@@ -61,4 +60,8 @@ const mapStateToProps = ({ schools, students }, { match }) => {
     }
   }
 
-export default connect(mapStateToProps)(SchoolFormEdit)
+  const mapDispatchToProps = dispatch => ({
+    updateSchool: school => dispatch(updateSchool(school))
+  })
+
+export default connect(mapStateToProps, mapDispatchToProps)(SchoolFormEdit)
