@@ -32,7 +32,7 @@ class AllSchools extends Component {
             }
         </ul>
         <Link to='/schools-create'>
-          <button>Add School</button>
+          <button className="button">Add School</button>
         </Link>
       </div>
     )

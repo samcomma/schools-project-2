@@ -18,7 +18,7 @@ class AllStudents extends Component {
             students.map(student => {
                 const studentsSchool = schools.find(school => school.id === student.schoolId)
                 return (
-                    <li className='story' key={student.id}>
+                    <li className='student' key={student.id}>
                         <Link to={`/students/${student.id}`} style={{ textDecoration: 'none' }}> 
                             <div>{student.firstName} {student.lastName} ({studentsSchool ? studentsSchool.name : 'Not Enrolled'})</div>
                         </Link>

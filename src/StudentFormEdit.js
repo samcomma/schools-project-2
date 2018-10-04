@@ -50,7 +50,7 @@ class StudentFormEdit extends Component {
               MUST ONLY ALLOW CURRENT SCHOOLS TO BE CHOSEN USING schools PROP
           </select> */}
           </label>
-          <button value='Update' onClick={() => updateStudent(this.state)}>Update</button>
+          <button value='update' onClick={() => updateStudent(this.state)}>Update</button>
         </form>
       </div>
     )

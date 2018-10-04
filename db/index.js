@@ -41,6 +41,7 @@ School.hasMany(Student)
 Student.belongsTo(School)
 
 
+
 const syncAndSeed = ()=> {
     return conn.sync({force: true})
       .then(async ()=> {

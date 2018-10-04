@@ -10,9 +10,9 @@ const { School, Student } = db.models
 const port = process.env.PORT || 3000 
 app.listen(port, ()=> console.log(`Now listening to port: ${port}`))
 
+
 app.use(volleyball)
 app.use(bodyParser.json());
-
 app.use('/dist', express.static(path.join(__dirname, 'dist')))
 
   
@@ -41,7 +41,6 @@ app.get('/api/schools/:schoolId', (req, res, next)=> {
 
 
 app.post('/api/schools', (req, res, next)=> {
-  console.log('hey hey hey sam', req.body)
   School.create(req.body)
   .then(school => res.send(school))
   .catch(next)

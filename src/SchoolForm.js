@@ -49,7 +49,7 @@ class SchoolForm extends Component {
             <label>Description:
                 <input type='text' name='description' value={this.state.value} onChange={this.handleChange} />
             </label>
-            <button value='Create' onClick={() => createSchool(this.state)}>Create</button>
+            <button value='create' onClick={() => createSchool(this.state)}>Create</button>
         </form>
       </div>
     )
