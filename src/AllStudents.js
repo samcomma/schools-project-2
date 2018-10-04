@@ -30,7 +30,7 @@ class AllStudents extends Component {
             })
             }
         </ul>
-        <Link to={'/students/create'}>
+        <Link to={'/students-create'}>
           <button>Add Student</button>
         </Link>
       </div>

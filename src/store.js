@@ -68,6 +68,7 @@ const getSchools = () => {
 }
 
 const createSchool = (school) => {
+  console.log('creating school', school)
   return (dispatch) => {
     axios.post('/api/schools', school)
       .then(res => res.data)

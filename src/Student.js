@@ -22,11 +22,11 @@ class Student extends Component {
         <br />
         <div>GPA: { student.gpa }</div>
         <br />
-        <Link to={'/students/:id/update'}>
+        <Link to={`/students/${student.id}/update`}>
           <button>Edit Student</button>
         </Link>
         <br />
-        <Link to={'/students/create'}>
+        <Link to={'/students-create'}>
           <button>Add Student</button>
         </Link>
         <br />

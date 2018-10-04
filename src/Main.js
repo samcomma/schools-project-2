@@ -30,11 +30,11 @@ class Main extends Component {
           <Switch>
             <Route exact path='/schools' component={AllSchools} />
             <Route exact path='/schools/:id' component={School} />
-            <Route exact path='/schools/create'  component={SchoolForm} />
+            <Route exact path='/schools-create'  component={SchoolForm} />
             <Route exact path='/schools/:id/update' component={SchoolFormEdit} />
             <Route exact path='/students' component={AllStudents} />
             <Route exact path='/students/:id' component={Student} />
-            <Route exact path='/students/create' component={StudentForm} />
+            <Route exact path='/students-create' component={StudentForm} />
             <Route exact path='/students/:id/update' component={StudentFormEdit} />
           </Switch>
           <div id='footer'>

@@ -37,11 +37,11 @@ class School extends Component {
                   </ul>
             </div>
         <br />
-        <Link to={'/schools/:id/update'}>
+        <Link to={`/schools/${school.id}/update`}>
           <button>Edit School</button>
         </Link>
         <br />
-        <Link to={'/schools/create'}>
+        <Link to={'/schools-create'}>
           <button>Add School</button>
         </Link>
         <br />

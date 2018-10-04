@@ -31,7 +31,7 @@ class AllSchools extends Component {
             })
             }
         </ul>
-        <Link to='/schools/create'>
+        <Link to='/schools-create'>
           <button>Add School</button>
         </Link>
       </div>
