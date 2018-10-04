@@ -79,6 +79,7 @@ const createSchool = (school) => {
 
 const updateSchool = (school) => {
   return (dispatch) => {
+    console.log(school)
     axios.put(`/api/schools/${school.id}`, school)
       .then(res => res.data)
       .then(school => dispatch(update_School(school)))

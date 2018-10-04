@@ -6,10 +6,12 @@ class SchoolFormEdit extends Component {
   constructor(props) {
     super(props)
     const { school } = this.props
+    console.log('**********', school)
     this.state = {
       name: school ? school.name : '',
       address: school ? school.address : '',
-      description: school ? school.description : ''
+      description: school ? school.description : '',
+      id: school ? school.id : ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)

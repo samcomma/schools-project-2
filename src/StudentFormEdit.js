@@ -10,13 +10,16 @@ class StudentFormEdit extends Component {
         firstName: student ? student.firstname : '',
         lastName: student ? student.lastname : '',
         gpa: student ? student.gpa : 0,
-        schoolId: student.schoolId ? student.schoolId : ''
+        schoolId: student ? student.schoolId : '',
+        id: student ? student.id : ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange (evt) {
+    console.log(evt.target.name)
+    console.log(evt.target.value)
     this.setState({
       [evt.target.name]: evt.target.value
     })
@@ -46,9 +49,9 @@ class StudentFormEdit extends Component {
             <input type='number' min='0' max='4' name='gpa' value={this.state.gpa} onChange={this.handleChange} />
           </label>
           <label>Attending:
-          <select name='school'>
-              {/*MUST ONLY ALLOW CURRENT SCHOOLS TO BE CHOSEN USING schools PROP*/}
-          </select>
+          {/* <select name='school'>
+              MUST ONLY ALLOW CURRENT SCHOOLS TO BE CHOSEN USING schools PROP
+          </select> */}
           </label>
           <input type='submit' value='submit' />
         </form>
