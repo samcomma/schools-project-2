@@ -1,24 +1,37 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { getStudents, deleteStudent } from './store'
+import { deleteStudent } from './store'
 //import StudentForm from './StudentForm'
 
 class Student extends Component {
 
   render () {
-    const { student, deleteStudent } = this.props
+    
+
+    const { student, schools, deleteStudent } = this.props
+    if (!student) return null
+    const studentsSchool = schools.find(school => school.id === student.schoolId)
     return (
-      <div id='single-story' className='column'>
+      <div id='single-student'>
         <h2>{ student.firstName } { student.lastName }</h2>
         <hr />
         <h3>Information</h3>
-        <div>Attending: {/*{ student.school.name }*/}</div>
+        <div>Attending: {studentsSchool ? studentsSchool.name : 'Not Enrolled'}</div>
         <br />
         <div>GPA: { student.gpa }</div>
         <br />
+        <Link to={'/students/:id/update'}>
+          <button>Edit Student</button>
+        </Link>
+        <br />
+        <Link to={'/students/create'}>
+          <button>Add Student</button>
+        </Link>
+        <br />
         <button className="button" onClick={() => deleteStudent(student)}>
-            Remove
+            Remove this Student
         </button>
       </div>
     )

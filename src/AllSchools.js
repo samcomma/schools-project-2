@@ -7,23 +7,28 @@ import { deleteSchool } from './store'
 class AllSchools extends Component {
 
   render () {
-    const { schools, deleteSchool } = this.props
-    console.log(this.props)
+    const { schools, students, deleteSchool } = this.props
     return (
-      <div id='schools' className='column'>
+      <div id='schools'>
+        <h3>Schools:</h3>
+        <hr />
+        <br />
         <ul>
             {
-            schools.map(school => (
+            schools.map(school => {
+              const studentsAttending = students.filter(student => school.id === student.schoolId)
+              return (
                 <li className='school' key={school.id}>
-                    <Link to={`/schools/${school.id}`}> 
-                        <h4>{school.name} (Students: {school.students.length}) </h4>
+                    <Link to={`/schools/${school.id}`} style={{ textDecoration: 'none' }}> 
+                        <h4>{school.name} (Students: {studentsAttending.length}) </h4>
                     </Link>
                     <button className="button" onClick={() => deleteSchool(school)}>
                         Remove
                     </button>
-                    <hr />
+                    <br />
                 </li>
-            ))
+              )
+            })
             }
         </ul>
         <Link to='/schools/create'>

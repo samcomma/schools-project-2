@@ -9,7 +9,9 @@ class School extends Component {
 
 
   render () {
-    const { school, deleteSchool } = this.props
+    const { school, students, deleteSchool } = this.props
+    if (!school) return null
+    const studentsAttending = students.filter(student => school.id === student.schoolId)
     return (
       <div id='single-school' className='column'>
         <h2>{ school.name }</h2>
@@ -24,7 +26,7 @@ class School extends Component {
             <div>
                 <ul>
                     {
-                    school.students.map(student => (
+                    studentsAttending.map(student => (
                         <li key={student.id}>
                         <Link to={`/students/${student.id}`}>
                             {student.firstName} {student.lastName}
@@ -35,8 +37,16 @@ class School extends Component {
                   </ul>
             </div>
         <br />
+        <Link to={'/schools/:id/update'}>
+          <button>Edit School</button>
+        </Link>
+        <br />
+        <Link to={'/schools/create'}>
+          <button>Add School</button>
+        </Link>
+        <br />
         <button className="button" onClick={() => deleteSchool(school)}>
-            Remove
+            Remove this School
         </button>
       </div>
     )

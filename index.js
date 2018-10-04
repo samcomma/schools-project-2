@@ -2,7 +2,6 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const volleyball = require('volleyball')
-app.use(require('body-parser').json())
 const db = require('./db')
 const { School, Student } = db.models
 
@@ -22,20 +21,17 @@ app.get('/', (req, res, next)=> {
 // SCHOOL ROUTES:
 app.get('/api/schools', (req, res, next)=> {
   School.findAll({
-    include: [ Student ],
     order: [
     ['name', 'ASC']
     ]
   })
-    .then(students => res.json(students))
+    .then(students => res.send(students))
     .catch(next)
 })
 
 
 app.get('/api/schools/:schoolId', (req, res, next)=> {
-  School.findById(req.params.schoolId, {
-    include: [ Student ]
-  })
+  School.findById(req.params.schoolId)
     .then(school => res.send(school))
     .catch(next)
 })
@@ -43,7 +39,7 @@ app.get('/api/schools/:schoolId', (req, res, next)=> {
 
 app.post('/api/schools', (req, res, next)=> {
   School.create(req.body)
-  .then(school => res.json(school))
+  .then(school => res.send(school))
   .catch(next)
 })
 
@@ -51,7 +47,7 @@ app.post('/api/schools', (req, res, next)=> {
 app.put('/api/schools/:id', (req, res, next)=> {
   School.findById(req.params.id)
   .then(school => school.update(req.body))
-  .then(school => res.json(school)) 
+  .then(school => res.send(school)) 
   .catch(next)
 })
   
@@ -68,20 +64,17 @@ app.delete('/api/schools/:id', (req, res, next)=> {
 // STUDENT ROUTES:
 app.get('/api/students', (req, res, next)=> {
   Student.findAll({
-    include: [School],
     order: [
     ['firstName', 'ASC']
     ]    
   })
-    .then(students => res.json(students))
+    .then(students => res.send(students))
     .catch(next)
 })
 
 
 app.get('/api/students/:studentId', (req, res, next)=> {
-  Student.findById(req.params.studentId, {
-    include: [School]
-  })
+  Student.findById(req.params.studentId)
     .then(student => res.send(student))
     .catch(next)
 })
@@ -89,7 +82,7 @@ app.get('/api/students/:studentId', (req, res, next)=> {
 
 app.post('/api/students', (req, res, next)=> {
   Student.create(req.body)
-  .then(student => res.json(student)) 
+  .then(student => res.send(student)) 
   .catch(next)
 })
 
@@ -97,7 +90,7 @@ app.post('/api/students', (req, res, next)=> {
 app.put('/api/students/:id', (req, res, next)=> {
   Student.findById(req.params.id)
   .then(student => student.update(req.body))
-  .then(student => res.json(student)) 
+  .then(student => res.send(student)) 
   .catch(next)
 })
 

@@ -7,9 +7,11 @@ import Navbar from './Navbar'
 import AllSchools from './AllSchools'
 import School from './School'
 import SchoolForm from './SchoolForm'
+import SchoolFormEdit from './SchoolFormEdit'
 import AllStudents from './AllStudents'
 import Student from './Student'
 import StudentForm from './StudentForm'
+import StudentFormEdit from './StudentFormEdit'
 import Footer from './Footer'
 
 
@@ -24,18 +26,17 @@ class Main extends Component {
     return (
       <Router>
         <div id='main'>
-          <div className='column container'>
             <Navbar />
-          </div>
           <Switch>
             <Route exact path='/schools' component={AllSchools} />
             <Route exact path='/schools/:id' component={School} />
-            <Route exact path="/students/create" component={SchoolForm} />
+            <Route exact path='/schools/create'  component={SchoolForm} />
+            <Route exact path='/schools/:id/update' component={SchoolFormEdit} />
             <Route exact path='/students' component={AllStudents} />
             <Route exact path='/students/:id' component={Student} />
-            <Route exact path="/students/create" component={StudentForm} />
+            <Route exact path='/students/create' component={StudentForm} />
+            <Route exact path='/students/:id/update' component={StudentFormEdit} />
           </Switch>
-          <br />
           <div id='footer'>
             <Footer />
           </div>
@@ -53,9 +54,8 @@ const mapStateToProps = ({ schools, students }) => ({
 
   
 const mapDispatchToProps = (dispatch) => ({
-    getSchools: () => dispatch(getSchools()),
-    getStudents: () => dispatch(getStudents())
+    getStudents: () => dispatch(getStudents()),
+    getSchools: () => dispatch(getSchools())
 })
   
 export default connect(mapStateToProps, mapDispatchToProps)(Main)
-  

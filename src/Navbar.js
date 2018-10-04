@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 
 
-const Navbar = (props) => {
-  return (
-    <div id='navbar' className='row'>
-      <Link to='/'>Home</Link>
-      <Link to='/schools'>Schools</Link>
-      <Link to='/students'>Students</Link>
-    </div>
-  )
+class Navbar extends Component {
+  render(){
+    return (
+        <div id='navbar'>
+        <Link to='/'><button className='btn-nav'>Home</button></Link>
+        <Link to='/schools'><button className='btn-nav'>Schools</button></Link>
+        <Link to='/students'><button className='btn-nav'>Students</button></Link>
+        </div>
+    )
+  }
 }
 
-export default Navbar
+export default connect()(Navbar)
