@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import store, { createStudent } from './store'
+import { createStudent } from './store'
 
 class StudentForm extends Component {
   constructor(props) {
@@ -8,7 +8,8 @@ class StudentForm extends Component {
     this.state = {
       firstName: '',
       lastName: '',
-      gpa: 0,
+      gpa: '',
+      schoolId: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -21,13 +22,20 @@ class StudentForm extends Component {
   }
   
 
-  handleSubmit (evt) {
-    //evt.preventDefault()
-    store.dispatch(createStudent(this.state))
+  handleSubmit(evt) {
+    //const { createStudent } = this.props
+    evt.preventDefault()
+    //createStudent(this.state)
+    this.setState = {
+      firstName: '',
+      lastName: '',
+      gpa: '',
+      schoolId: ''
+    }
   }
 
   render() {
-    const { schools } = this.props
+    const { schools, createStudent } = this.props
     return (
       <div>
         <h3>Create Student:</h3>
@@ -41,18 +49,21 @@ class StudentForm extends Component {
             <input type='text' name='lastName' value={this.state.lastName} onChange={this.handleChange} />
           </label>
           <label>GPA:
-            <input type='number' step='0.1' min='0' max='4' name='gpa' value={this.state.gpa} onChange={this.handleChange} />
+            <input type='number' step='0.10' min='0' max='4' name='gpa' value={this.state.gpa} onChange={this.handleChange} />
           </label>
           <label>Attending:
-          <select name='school' value={this.state.schoolId} onChange={this.handleChange}>
-              {
-                schools.map(school => (
-                  <option key={school.id}>{school.name}</option>
-                ))
-              }  
+          <select type='text' name='schoolId' value={this.state.schoolId} onChange={this.handleChange}>
+            <option value=''>Choose School</option>
+                {schools.map(school => {
+                  return (
+                    <option key={school.id} value={school.id}>
+                      {school.name}
+                    </option>
+                  );
+                })}
           </select>
           </label>
-          <button className='button' value='submit' onClick={() => createStudent(this.state)}>Create</button>
+          <button value='create' onClick={() => createStudent(this.state)}>Create</button>
         </form>
       </div>
     )
@@ -65,8 +76,8 @@ const mapStateToProps = ({ students, schools }) => ({
     schools
   })
 
-const mapDispatchToProps = dispatch => ({
+  const mapDispatchToProps = dispatch => ({
     createStudent: student => dispatch(createStudent(student))
   })
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentForm);
+export default connect(mapStateToProps, mapDispatchToProps)(StudentForm)

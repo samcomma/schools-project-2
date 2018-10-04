@@ -10,7 +10,7 @@ class StudentFormEdit extends Component {
         firstName: student ? student.firstname : '',
         lastName: student ? student.lastname : '',
         gpa: student ? student.gpa : 0,
-        id: student ? student.id : ''
+        schoolId: student.schoolId ? student.schoolId : ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -23,9 +23,16 @@ class StudentFormEdit extends Component {
   }
   
 
-  handleSubmit (evt) {
-    //evt.preventDefault()
-    store.dispatch(updateStudent(this.state))
+  handleSubmit(evt) {
+    const { updateStudent } = this.props
+    evt.preventDefault()
+    updateStudent(this.state)
+    this.setState = {
+      firstName: '',
+      lastName: '',
+      gpa: '',
+      schoolId: ''
+    }
   }
 
   render() {
@@ -43,14 +50,21 @@ class StudentFormEdit extends Component {
             <input type='text' name='lastName' value={this.state.lastName} onChange={this.handleChange} />
           </label>
           <label>GPA:
-            <input type='number' step='0.10' min='0' max='4' name='gpa' value={this.state.gpa} onChange={this.handleChange} />
+            <input type='number' min='0' max='4' name='gpa' value={this.state.gpa} onChange={this.handleChange} />
           </label>
           <label>Attending:
-          {/* <select name='school'>
-              MUST ONLY ALLOW CURRENT SCHOOLS TO BE CHOSEN USING schools PROP
-          </select> */}
+          <select type='text' name='schoolId' value={this.state.schoolId} onChange={this.handleChange}>
+            <option value=''>Choose School</option>
+                {schools.map(school => {
+                  return (
+                    <option key={school.id} value={school.id}>
+                      {school.name}
+                    </option>
+                  );
+                })}
+          </select>
           </label>
-          <button className='button' value='update' onClick={() => updateStudent(this.state)}>Update</button>
+          <button value='create' onClick={() => updateStudent(this.state)}>Update</button>
         </form>
       </div>
     )

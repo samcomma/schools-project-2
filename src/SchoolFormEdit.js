@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import store, { updateSchool } from './store'
+import { updateSchool } from './store'
 
 class SchoolFormEdit extends Component {
   constructor(props) {
@@ -10,7 +10,6 @@ class SchoolFormEdit extends Component {
       name: school ? school.name : '',
       address: school ? school.address : '',
       description: school ? school.description : '',
-      id: school ? school.id : ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -24,8 +23,14 @@ class SchoolFormEdit extends Component {
   
 
   handleSubmit(evt) {
-    //evt.preventDefault()
-    store.dispatch(updateSchool(this.state))
+    const { updateSchool } = this.props
+    evt.preventDefault()
+    updateSchool(this.state)
+    this.setState = {
+      name: '',
+      address: '',
+      description: ''
+    }
   }
 
   render(){
@@ -36,15 +41,15 @@ class SchoolFormEdit extends Component {
         <br />
         <form id='createForm' onSubmit={this.handleSubmit}>
             <label>Name:
-                <input type='text' name='name' value={this.state.value} onChange={this.handleChange}/>
+                <input type='text' name='name' value={this.state.name} onChange={this.handleChange}/>
             </label>
             <label>Address:
-                <input type='text' name='address' value={this.state.value} onChange={this.handleChange}/>
+                <input type='text' name='address' value={this.state.address} onChange={this.handleChange}/>
             </label>
             <label>Description:
-                <input type='text' name='description' value={this.state.value} onChange={this.handleChange} />
+                <input type='text' name='description' value={this.state.description} onChange={this.handleChange} />
             </label>
-            <button className='button' value='Update' onClick={() => updateSchool(this.state)}>Update</button>
+            <button value='Update' onClick={() => updateSchool(this.state)}>Update</button>
         </form>
       </div>
     )
