@@ -8,7 +8,7 @@ class StudentForm extends Component {
     this.state = {
       firstName: '',
       lastName: '',
-      gpa: 0
+      gpa: 0,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -44,8 +44,12 @@ class StudentForm extends Component {
             <input type='number' step='0.1' min='0' max='4' name='gpa' value={this.state.gpa} onChange={this.handleChange} />
           </label>
           <label>Attending:
-          <select name='school'>
-              {/*MUST ONLY ALLOW CURRENT SCHOOLS TO BE CHOSEN USING schools PROP*/}
+          <select name='school' value={this.state.schoolId} onChange={this.handleChange}>
+              {
+                schools.map(school => (
+                  <option key={school.id}>{school.name}</option>
+                ))
+              }  
           </select>
           </label>
           <button value='submit' onClick={() => createStudent(this.state)}>Create</button>

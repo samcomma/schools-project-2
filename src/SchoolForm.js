@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import store, { createSchool } from './store'
+import { createSchool } from './store'
 
 class SchoolForm extends Component {
   constructor(props) {
@@ -22,12 +22,17 @@ class SchoolForm extends Component {
   
 
   handleSubmit(evt) {
-    //evt.preventDefault()
-    store.dispatch(createSchool(this.state))
+    const { createSchool } = this.props
+    evt.preventDefault()
+    createSchool(this.state)
+    this.setState = {
+      name: '',
+      address: '',
+      description: ''
+    }
   }
 
   render(){
-    console.log('in render')
     const { createSchool } = this.props
     return(
       <div>
